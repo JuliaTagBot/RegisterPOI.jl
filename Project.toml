@@ -1,0 +1,14 @@
+name = "RegisterPOI"
+uuid = "e39e11d7-4bd3-5146-92b9-a72e4930e608"
+authors = ["yakir12 <12.yakir@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+JuliaDB = "a93385a2-3734-596a-9a66-3cfbb77141e6"
+REPL = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
+UUIDs = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
