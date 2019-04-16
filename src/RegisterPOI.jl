@@ -62,7 +62,7 @@ function main()
     x0 = CSV.File(done_file)
     tbl = load(joinpath(@__DIR__, "data.jdb"))
     if length(x0) ≠ 0
-        x1 = loadtable(done_file) |> dropmissing
+        x1 = loadtable(done_file)
         x2 = setcol(x1, :interval => UUID.(select(x1, :interval)))
         tbl = join(tbl, x2, lkey = :interval, rkey = :interval, how = :anti)
     end
