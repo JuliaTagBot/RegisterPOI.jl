@@ -76,10 +76,11 @@ function main()
             println(r[1].id)
             printstyled("The calibration video for this run was: ", bold = true, color = :normal)
             println(r[1].file_name)
-            # groupby(table(r), :interval) do poi
-            for poi in r
-                tmp = loadtable(done_file)
-                poi.interval ∈ UUID.(select(tmp, :interval)) && continue
+            groupby(table(r), :interval, usekey = true) do interval, _poi
+                poi = _poi[1]
+            # for poi in r
+                # tmp = loadtable(done_file)
+                # poi.interval ∈ UUID.(select(tmp, :interval)) && continue
                 @label start_poi
                 printstyled("POI: ", bold = true, color = :yellow)
                 println(poi.type)
@@ -155,7 +156,7 @@ function main()
                     println("----------------Undoing last input!---------------")
                     @goto start_poi
                 end
-                ((interval = string(poi.interval), video = string(start_video.video), start = Dates.value(start), stop = Dates.value(stop), comment = comment), ) |> CSV.write(done_file, append = true)
+                ((interval = string(interval), video = string(start_video.video), start = Dates.value(start), stop = Dates.value(stop), comment = comment), ) |> CSV.write(done_file, append = true)
                 # @assert !haskey(done, poi.interval) "record already exists in the database"
                 # done[poi.interval] = (video = start_video.video, start = start, stop = stop, comment = comment)
             end
