@@ -76,7 +76,10 @@ function main()
             println(r[1].id)
             printstyled("The calibration video for this run was: ", bold = true, color = :normal)
             println(r[1].file_name)
+            # groupby(table(r), :interval) do poi
             for poi in r
+                tmp = loadtable(done_file)
+                poi.interval ∈ UUID.(select(tmp, :interval)) && continue
                 @label start_poi
                 printstyled("POI: ", bold = true, color = :yellow)
                 println(poi.type)
@@ -103,7 +106,7 @@ function main()
                     lasttime.x = tmp
                 end
                 _start = lasttime.x
-                start = reduce(+, [r.duration for r in videofile if r.video == start_video.video && r.index < start_video.index], init = _start)
+                start = reduce(+, [x.duration for x in videofile if x.video == start_video.video && x.index < start_video.index], init = _start)
                 # println("Start time specified: ", Time(0) + start)
                 i = request("In which video file did this POI stop?", video_menu)
                 i = setgetdefault(i, video_menu)
@@ -136,7 +139,7 @@ function main()
                     lasttime.x = tmp
                 end
                 _stop = lasttime.x
-                stop = reduce(+, [r.duration for r in videofile if r.video == stop_video.video && r.index < stop_video.index], init = _stop)
+                stop = reduce(+, [x.duration for x in videofile if x.video == stop_video.video && x.index < stop_video.index], init = _stop)
                 if start > stop
                     printstyled("Stoping time comes after starting time. Try again…\n", bold = true, color = :red)
                     @goto stop_time

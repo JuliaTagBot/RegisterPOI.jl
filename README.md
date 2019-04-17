@@ -43,3 +43,10 @@ This is a `Julia` script for registering raw data into a long lasting and cohere
 8. Confirm the addition of this data or undo to return to step #4.
 
 These steps will repeat for each of the POIs in the dataset. All this data is saved to a `RegisterPOI.csv` file in your home directory (hint: type `homedir()` into a Julia terminal to find out what that directory is). To stop registering just press `Ctrl-c`. You can rerun `main()` to resume registering.
+
+## How to update
+Copy paste the following into a Julia terminal and press Enter:
+```julia
+] up
+```
+If you had `RegisterPOI` already running in this current session, restart the session. If you've updated in a fresh session, you can run `RegisterPOI` (stage #2 from **How to run**) without restarting the terminal. 
