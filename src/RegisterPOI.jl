@@ -109,7 +109,8 @@ function main()
                 _start = lasttime.x
                 start = reduce(+, [x.duration for x in videofile if x.video == start_video.video && x.index < start_video.index], init = _start)
                 # println("Start time specified: ", Time(0) + start)
-                i = request("In which video file did this POI stop?", video_menu)
+                # #################### removing the stoping point
+                #=i = request("In which video file did this POI stop?", video_menu)
                 i = setgetdefault(i, video_menu)
                 stop_video = videofile[i]
                 if start_video.video ≠ stop_video.video
@@ -144,7 +145,9 @@ function main()
                 if start > stop
                     printstyled("Stoping time comes after starting time. Try again…\n", bold = true, color = :red)
                     @goto stop_time
-                end
+                end=#
+                stop_video = start_video
+                stop = start
                 # println("Stop time specified: ", Time(0) + stop)
                 println("Comments?")
                 _comment = strip(readline())
