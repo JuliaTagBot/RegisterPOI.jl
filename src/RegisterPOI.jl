@@ -159,7 +159,7 @@ function main()
                     println("----------------Undoing last input!---------------")
                     @goto start_poi
                 end
-                ((interval = string(interval), video = string(start_video.video), start = Dates.value(start), stop = Dates.value(stop), comment = comment), ) |> CSV.write(done_file, append = true)
+                ((interval = string(interval.interval), video = string(start_video.video), start = Dates.value(start), stop = Dates.value(stop), comment = comment), ) |> CSV.write(done_file, append = true)
                 # @assert !haskey(done, poi.interval) "record already exists in the database"
                 # done[poi.interval] = (video = start_video.video, start = start, stop = stop, comment = comment)
             end
